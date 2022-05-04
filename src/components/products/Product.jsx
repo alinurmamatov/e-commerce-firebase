@@ -5,8 +5,8 @@ function Product({id, data}) {
 
   return (
     <div>
-        <p>{data.name}</p>
         <img src={data.image} width="200px"/>
+        <p>{data.name}</p>
         <p>${data.price}</p>
         <button onClick={() => setQuantity(quantity - 1)}>-</button>
         <button>add to cart</button>

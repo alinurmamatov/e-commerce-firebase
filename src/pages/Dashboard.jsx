@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from '../components/commons/Header';
 
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <>
+      <Header/>
+      <div>Dashboard</div>
+    </>
   )
 }
 

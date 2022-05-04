@@ -10,7 +10,7 @@ function AllProducts() {
         <div>AllProducts</div>
         {
             allProducts.map((product) => (
-                <Product data={product.data} id={product.id} />
+                <Product data={product.data} id={product.id} key={product.id}/>
             ))
         }
       </>
