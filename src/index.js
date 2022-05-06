@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import AuthProvider from './context/AuthContext';
 import FirestoreProvider from './context/FirestoreContext';
 import {BrowserRouter} from 'react-router-dom';
+import CartProvider from './context/CartContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,9 +14,11 @@ root.render(
   <React.StrictMode>
     <FirestoreProvider>
       <AuthProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <CartProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </CartProvider>
       </AuthProvider>
     </FirestoreProvider>
   </React.StrictMode>

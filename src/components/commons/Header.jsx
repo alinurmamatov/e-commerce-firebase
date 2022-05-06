@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {Grid, Button, Box, Typography, CardMedia} from '@mui/material';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../../context/CartContext';
 
 function Header() {
+  const {cartProducts} = useContext(CartContext);
+  const amount = cartProducts.reduce((acc, product) => product.quantity + acc, 0)
+
   return (
     <Grid container spacing={2} style={{justifyContent: 'space-around'}}>
       <Grid item xs={12} md={4}>
@@ -21,7 +25,9 @@ function Header() {
           <Link to='/about' style={{textDecoration: 'none', color: 'black'}}>
             <Typography sx={{minWidth: 150}}>About Zegna</Typography>
           </Link>
-          <Button color='secondary' variant='outlined'>Cart</Button>
+          <Link to='/cart'>
+            <Button color='secondary' variant='outlined'>Cart {amount}</Button>
+          </Link>
         </Box>
       </Grid>
     </Grid>

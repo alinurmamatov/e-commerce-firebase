@@ -4,6 +4,8 @@ import { AuthContext } from './context/AuthContext';
 import {Route, Routes} from 'react-router-dom';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
+import CartList from './pages/CartList';
+import MakeOrder from './pages/MakeOrder';
 
 function App() {
   // const {signInWithEmailandPassword, userMain, logOut, loginWithEmail} = useContext(AuthContext);
@@ -17,6 +19,8 @@ function App() {
     <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path='/cart' element={<CartList/>}/>
+        <Route path='/make-order' element={<MakeOrder/>}/>
     </Routes>
     </div>
     </>
