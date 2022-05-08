@@ -9,6 +9,8 @@ const cartReducer = (state, action) => {
     switch(action.type) {
         case actions.ADDTOCART:
             return [...state, action.payload]
+        case actions.REMOVEPRODUCT:
+            return state.filter((el) => el.id !== action.payload)
         default:
             return state
     }

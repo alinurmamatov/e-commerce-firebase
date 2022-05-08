@@ -3,9 +3,15 @@ import Header from '../components/commons/Header';
 import {Grid, Button} from '@mui/material';
 import { CartContext } from '../context/CartContext';
 import { Link } from 'react-router-dom';
+import * as actions from '../context/actions';
 
 function CartList() {
-    const {cartProducts} = useContext(CartContext);
+    const {cartProducts, dispatch} = useContext(CartContext);
+
+    const handleDelete = (id) => {
+        dispatch({type: actions.REMOVEPRODUCT, payload: id})
+    }
+    
   return (
     <>
         <Header/>
@@ -22,7 +28,7 @@ function CartList() {
                         <Grid item md={2}>{product.name}</Grid>
                         <Grid item md={2}>{product.quantity}</Grid>
                         <Grid item md={2}>{product.price}</Grid>
-                        <Grid item md={3}><Button>X</Button> </Grid>
+                        <Grid item md={3}><Button onClick={() => handleDelete(product.id)}>X</Button></Grid>
                     </>
                   /*   <div key={product.id}>
                         <img src={product.image} alt={product.name} width="200px"/>

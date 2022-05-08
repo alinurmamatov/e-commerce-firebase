@@ -5,6 +5,7 @@ import * as actions from '../../context/actions';
 function Product({id, data}) {
     const [quantity, setQuantity] = useState(0);
     const {dispatch} = useContext(CartContext);
+    
     const handleAddToCart = () => {
       dispatch({type: actions.ADDTOCART, payload: {...data, id: id, quantity: quantity}})
     }
