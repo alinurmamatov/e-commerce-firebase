@@ -8,6 +8,7 @@ function Product({id, data}) {
     
     const handleAddToCart = () => {
       dispatch({type: actions.ADDTOCART, payload: {...data, id: id, quantity: quantity}})
+      setQuantity(0)
     }
 
   return (

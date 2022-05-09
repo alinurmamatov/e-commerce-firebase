@@ -6,6 +6,10 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import CartList from './pages/CartList';
 import MakeOrder from './pages/MakeOrder';
+import Login from './pages/Login';
+import AllOrders from './pages/AllOrders';
+import SeeProducts from './pages/SeeProducts';
+import AddProduct from './pages/AddProduct';
 
 function App() {
   // const {signInWithEmailandPassword, userMain, logOut, loginWithEmail} = useContext(AuthContext);
@@ -18,9 +22,14 @@ function App() {
     <div className="App">
     <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/cart' element={<CartList/>}/>
         <Route path='/make-order' element={<MakeOrder/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}>
+          <Route path='all-orders' element={<AllOrders/>}/>
+          <Route path='add-product' element={<AddProduct/>}/>
+          <Route path='see-products' element={<SeeProducts/>}/>
+        </Route>
     </Routes>
     </div>
     </>

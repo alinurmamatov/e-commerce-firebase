@@ -2,9 +2,12 @@ import React, { useContext } from 'react';
 import {Grid, Button, Box, Typography, CardMedia} from '@mui/material';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
+import { AuthContext } from '../../context/AuthContext';
 
 function Header() {
   const {cartProducts} = useContext(CartContext);
+  const {userMain, logOut} = useContext(AuthContext);
+
   const amount = cartProducts.reduce((acc, product) => product.quantity + acc, 0)
 
   return (
@@ -28,6 +31,13 @@ function Header() {
           <Link to='/cart'>
             <Button color='secondary' variant='outlined'>Cart {amount}</Button>
           </Link>
+          {
+            !userMain ? (
+              <Link to='/login'>
+                <Button variant='outlined'>Login</Button>
+              </Link>) : (
+                <Button variant='outlined' onClick={() => logOut()}>Log Out</Button>)
+          }
         </Box>
       </Grid>
     </Grid>

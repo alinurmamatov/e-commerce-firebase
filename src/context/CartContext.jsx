@@ -8,6 +8,16 @@ const initialState = [];
 const cartReducer = (state, action) => {
     switch(action.type) {
         case actions.ADDTOCART:
+            const existingProduct = state.find((product) => product.id === action.payload.id);
+            if(existingProduct) {
+                const newState = state.map((product) => {
+                    if(product.id === action.payload.id) {
+                        product.quantity += action.payload.quantity;
+                    }
+                    return product;
+                })
+                return newState;
+            }
             return [...state, action.payload]
         case actions.REMOVEPRODUCT:
             return state.filter((el) => el.id !== action.payload)

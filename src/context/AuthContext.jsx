@@ -31,6 +31,7 @@ const AuthProvider = ({children}) => {
     const loginWithEmail = async(email, password) => {
         try {
             const userLogin = await signInWithEmailAndPassword(firebaseApp.auth, email, password)
+            //console.log(userLogin);
         } catch(error) {
             console.log(error);
         }
