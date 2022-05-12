@@ -1,8 +1,11 @@
 import React from 'react';
+import FormProducts from '../components/FormProducts';
 
 function AddProduct() {
   return (
-    <div>AddProduct</div>
+    <>
+      <FormProducts/>
+    </>
   )
 }
 

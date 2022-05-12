@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import AllOrders from './pages/AllOrders';
 import SeeProducts from './pages/SeeProducts';
 import AddProduct from './pages/AddProduct';
+import About from './pages/About';
 
 function App() {
   // const {signInWithEmailandPassword, userMain, logOut, loginWithEmail} = useContext(AuthContext);
@@ -30,6 +31,7 @@ function App() {
           <Route path='add-product' element={<AddProduct/>}/>
           <Route path='see-products' element={<SeeProducts/>}/>
         </Route>
+        <Route path='/about' element={<About/>}/>
     </Routes>
     </div>
     </>

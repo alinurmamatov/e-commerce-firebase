@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import * as firebaseApp from '../firebase/configFirebase';
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, onSnapshot } from "firebase/firestore";
 import {ref, uploadBytesResumable, getDownloadURL} from 'firebase/storage';
 
 export const FirestoreContext = createContext();
@@ -36,6 +36,11 @@ const FirestoreProvider = ({children}) => {
     useEffect(() => {
         getAllProducts()
     }, [])
+
+    const refToFirebase = doc(firebaseApp.firestore, 'products', 'name');
+    onSnapshot(refToFirebase, (doc) => {
+        getAllProducts()
+    })
 
     const data = {
         allProducts: allProducts,
