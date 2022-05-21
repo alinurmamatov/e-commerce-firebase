@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import * as firebaseApp from '../firebase/configFirebase';
-import { collection, addDoc, getDocs, doc, onSnapshot } from "firebase/firestore";
-import {ref, uploadBytesResumable, getDownloadURL} from 'firebase/storage';
+import { collection, addDoc, getDocs, doc, onSnapshot, deleteDoc, updateDoc } from "firebase/firestore";
+import {ref, uploadBytesResumable, getDownloadURL, deleteObject} from 'firebase/storage';
+
 
 export const FirestoreContext = createContext();
 const refCollection = collection(firebaseApp.firestore, "products");
@@ -14,15 +15,8 @@ const FirestoreProvider = ({children}) => {
         const uploadImage = uploadBytesResumable(refHosting, newImage);
         uploadImage.on(
             'state_changed', (snapshot) => {
-                //const process = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                //console.log(process);
             }, (error) => {console.log(error.message)}, () => getDownloadURL(uploadImage.snapshot.ref).then((url) => addDoc(refCollection, {...newProduct, image: url}))
         )
-        /* try {
-            await addDoc(refCollection, newProduct);
-        } catch(error) {
-            console.log(error);
-        } */
     }
 
     const getAllProducts = async() => {
@@ -34,17 +28,36 @@ const FirestoreProvider = ({children}) => {
     }
 
     useEffect(() => {
-        getAllProducts()
+        getAllProducts();
     }, [])
-
+ 
     const refToFirebase = doc(firebaseApp.firestore, 'products', 'name');
     onSnapshot(refToFirebase, (doc) => {
-        getAllProducts()
+        getAllProducts();
     })
 
+    const editProduct = async (newData) => {
+        const refToDoc = doc(firebaseApp.firestore, 'products', newData.id);
+        const cleanData = {...newData};
+        delete cleanData.id;
+        updateDoc(refToDoc, {...cleanData});
+    }
+    
+    const deleteProduct = async (id, imgToDelete) => {
+        await deleteDoc(doc(firebaseApp.firestore, 'products', id));
+        deleteImg(imgToDelete);
+    }
+
+    const deleteImg = (imgName) => {
+        const refToImg = ref(firebaseApp.storage, `images/${imgName}`);
+        deleteObject(refToImg).then(() => {}).catch((err) => console.log(err?.message))
+    }
+    
     const data = {
         allProducts: allProducts,
-        addProduct: addProduct
+        addProduct: addProduct,
+        deleteProduct: deleteProduct,
+        editProduct: editProduct
     }
 
     return (
