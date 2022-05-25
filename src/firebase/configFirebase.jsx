@@ -4,13 +4,13 @@ import {getFirestore} from 'firebase/firestore';
 import {getStorage} from 'firebase/storage';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDuHnnL2lljPSiEQCUoNzBqQ_gF1FpWhrI",
-    authDomain: "firease-mario.firebaseapp.com",
-    projectId: "firease-mario",
-    storageBucket: "firease-mario.appspot.com",
-    messagingSenderId: "261762197950",
-    appId: "1:261762197950:web:26e54dbdc9037672b4b1ef",
-    measurementId: "G-6D654V2T2G"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
   };
 
   const app = initializeApp(firebaseConfig);
