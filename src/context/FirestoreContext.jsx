@@ -6,9 +6,12 @@ import {ref, uploadBytesResumable, getDownloadURL, deleteObject} from 'firebase/
 
 export const FirestoreContext = createContext();
 const refCollection = collection(firebaseApp.firestore, "products");
+const refCollectionOrders = collection(firebaseApp.firestore, "orders");
+
 
 const FirestoreProvider = ({children}) => {
     const [allProducts, setAllProducts] = useState([]);
+    const [allOrders, setAllOrders] = useState([]);
 
     const addProduct = async(newProduct, newImage) => {
         const refHosting = ref(firebaseApp.storage, `images/${newImage.name}`);
@@ -19,11 +22,23 @@ const FirestoreProvider = ({children}) => {
         )
     }
 
+    const saveOrder = async (cardData, userData) => {
+        addDoc(refCollectionOrders, {...cardData, ...userData})
+    }
+
     const getAllProducts = async() => {
         const productsFromFirestore = await getDocs(refCollection);
         setAllProducts(productsFromFirestore.docs.map((product) => ({
             data: product.data(),
             id: product.id
+        })))
+    }
+
+    const getAllOrders = async () => {
+        const ordersFromFirestone = await getDocs(refCollectionOrders);
+        setAllOrders(ordersFromFirestone.docs.map((order) => ({
+            data: order.data(),
+            id: order.id
         })))
     }
 
@@ -55,9 +70,12 @@ const FirestoreProvider = ({children}) => {
     
     const data = {
         allProducts: allProducts,
+        allOrders: allOrders,
         addProduct: addProduct,
         deleteProduct: deleteProduct,
-        editProduct: editProduct
+        editProduct: editProduct,
+        saveOrder: saveOrder,
+        getAllOrders: getAllOrders
     }
 
     return (

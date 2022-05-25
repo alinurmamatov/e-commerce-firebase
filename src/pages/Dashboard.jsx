@@ -22,7 +22,7 @@ function Dashboard() {
                 </ListItemButton>
                 <Divider/>
                 <ListItemButton>
-                  <Link to='all-orders'>Orders</Link>
+                  <Link to='all-orders'>All Orders</Link>
                 </ListItemButton>
                 <Divider/>
                 <ListItemButton>

@@ -2,14 +2,17 @@ import React, { useContext, useState } from 'react';
 import Header from '../components/commons/Header';
 import {Grid, List, ListItem, FormControl, Input, Button} from '@mui/material';
 import { CartContext } from '../context/CartContext';
+import { FirestoreContext } from '../context/FirestoreContext';
 
 function MakeOrder() {
   const {cartProducts} = useContext(CartContext);
+  const {saveOrder} = useContext(FirestoreContext);
   const [customerData, setCustomerData] = useState({});
 
   const handleMakeOrder = () => {
-    console.log(customerData, 'make order No ......');
+    saveOrder(cartProducts, customerData);
   }
+
 
   return (
       <>
